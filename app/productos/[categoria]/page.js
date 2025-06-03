@@ -1,27 +1,21 @@
-import mockData from "@/app/data/productos.json"
-import ProductCard from "@/app/components/ProductCard"
+import ProductList from "@/app/components/ProductList";
 
-export async function generateMetadata({params, searchParams}, parent) {
-    let {categoria} = await params;
-    categoria = categoria == "all" ? "Productos" : categoria;
+export async function generateMetadata({ params }) {
+    const { categoria } = await params;
+    const titulo = categoria === "all" ? "Todos los productos" : categoria;
 
     return {
-        title:`${params} - Sonnos Equipamiento`,
-    }
+        title: `${titulo.toUpperCase()} | Sonnos Equipamiento`,
+    };
 }
-const Productos = async ({params}) => {   
-    const {categoria} = await params;
-    const items = categoria == "all" ? mockData : mockData.filter(item => item.categoria == categoria);
+
+const Productos = async ({ params }) => {
+    const { categoria } = await params;
+    
 
     return (
-        <section className="container flex flex-row m-auto my-20">
-            {
-                items.map(item => (
-                    <ProductCard key={item.slug} item={item} />
-                ))
-            }
-        </section>
-    )
-}
+        <ProductList categoria={categoria}/>
+    );
+};
 
-export default Productos
+export default Productos;

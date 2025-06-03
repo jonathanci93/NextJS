@@ -11,10 +11,13 @@ const MenuList = ({ open, handleClose }) => {
                 </div>
                 <nav className="flex flex-col gap-4 p-6">
                     <Link href={"/nosotros"} className="text-white hover:text-red-600 transition">Nosotros</Link>
-                    <Link href={"/productos"} className="text-white hover:text-red-600 transition">Productos</Link>
+                    <Link href={"/productos/all"} className="text-white hover:text-red-600 transition">Productos</Link>
                     <Link href={"/productos/pecho"} className="text-white hover:text-red-600 transition">Pecho</Link>
                     <Link href={"/productos/espalda"} className="text-white hover:text-red-600 transition">Espalda</Link>
                     <Link href={"/productos/piernas"} className="text-white hover:text-red-600 transition">Piernas</Link>
+                    <Link href={"/carrito"} className="text-white hover:text-red-600 transition">Carrito</Link>
+                    <Link href={"/admin"} className="text-white hover:text-red-600 transition">Administrador</Link>
+                    <Link href={"/contacto"} className="text-white hover:text-red-600 transition">Contacto</Link>
 
                 </nav>
             </aside>

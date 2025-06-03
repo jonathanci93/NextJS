@@ -16,17 +16,10 @@ const NavigationMenu = () => {
                 <ul className="flex flex-wrap gap-6 text-sm sm:text-base font-semibold text-white">
                     {
                         categorias.map(item => {
-                            const esActiva = item === categoria;
+                            let destacado = item === categoria;
                             return (
                                 <li key={item}>
-                                    <Link
-                                        href={`/productos/${item}`}
-                                        className={`transition px-3 py-1 rounded-md 
-                                            ${esActiva 
-                                                ? "text-red-600 border-b-2 border-red-600" 
-                                                : "hover:text-red-500"}
-                                        `}
-                                    >
+                                    <Link href={`/productos/${item}`} className={`transition px-3 py-1 rounded-md  ${destacado ? "text-red-600 border-b-2 border-red-600" : "hover:text-red-500"}`}>
                                         {item.toUpperCase()}
                                     </Link>
                                 </li>
