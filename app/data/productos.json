@@ -1,0 +1,50 @@
+[
+    {
+        "slug": 1,
+        "titulo": "Banco pecho plano",
+        "descripcion": "Banco de pecho plano de acero inoxidable con superficie plana, ideal para ejercicios de pecho.",
+        "precio": 200000,
+        "imagen": "/images/pecho-plano.jpg",
+        "categoria": "pecho"
+    },
+        {
+        "slug": 2,
+        "titulo": "Banco pecho inclinado",
+        "descripcion": "Banco de pecho inclinado de acero inoxidable con superficie plana, ideal para ejercicios de pecho.",
+        "precio": 200000,
+        "imagen": "/images/pecho-inclinado.jpg",
+        "categoria": "pecho"
+    },
+        {
+        "slug": 3,
+        "titulo": "Manijas para flexiones",
+        "descripcion": "Agarre acolchado y confortable, bases PVC estables con goma antideslizante",
+        "precio": 30000,
+        "imagen": "/images/espalda-apoyador.png",
+        "categoria": "espalda"
+    },
+            {
+        "slug": 4,
+        "titulo": "Equipo multifuncional",
+        "descripcion": "Útil para trabajar: dorsales, bíceps, tríceps, abdominales, cuádriceps, espalda, pecho y aductores.",
+        "precio": 30000,
+        "imagen": "/images/espalda-multifuncion.png",
+        "categoria": "espalda"
+    },
+                {
+        "slug": 5,
+        "titulo": "Silla para cuadriceps",
+        "descripcion": "Banco complementario del multigimnasio GH FORCE. Diseñado especialmente como complemento de este modelo de multi-gimnasio Estructura armada con caño de acero",
+        "precio": 30000,
+        "imagen": "/images/piernas-cuadriceps.png",
+        "categoria": "piernas"
+    },
+                    {
+        "slug": 6,
+        "titulo": "Silla para isquiotibiales",
+        "descripcion": "Silla util para trabajar los isquitibiales de acero inoxidable",
+        "precio": 30000,
+        "imagen": "/images/piernas-isquios.jpg",
+        "categoria": "piernas"  
+    }
+]
