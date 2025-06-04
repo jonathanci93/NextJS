@@ -13,7 +13,10 @@ Este proyecto es parte de la cursada de la **Diplomatyra**, donde estoy desarrol
 - ✅ Estética adaptada al logo Sonnos (no propio) usando Tailwind
 - ✅ Menu estilo hamburguesa
 - ✅ API simulada local que responde dinámicamente según categoría
-
+- ✅ Carrito de compras(`CartContext`)
+- ✅ Contexto de autenticación (`AuthContext`)
+- ✅ Funciones: sumar ítems, vaciar carrito, eliminar productos y calcular total
+- ✅ Integración con Firebase
 
 ---
 
