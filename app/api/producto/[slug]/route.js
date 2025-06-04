@@ -4,9 +4,10 @@ import { NextResponse } from "next/server";
 
 
 export async function GET (response, {params}) {
-    const {slug} = params;
+    const {slug} = await params;
     const docRef = doc(db,"productos", slug)
     const querySnapshot = await getDoc(docRef);
+    
     let item = {id:querySnapshot.id, ...querySnapshot.data()}
 
     if (!item) {

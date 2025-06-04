@@ -1,25 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+"use client"
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
+import { AuthContext } from "@/app/context/AuthContext";
+import { useContext } from "react";
+import LoginPage from "./@login/page";
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
+const AdminLayout = ({children}) => {
+    const {user} = useContext(AuthContext);
 
-export const metadata = {
-    title: "Admin | Sitio en construcción",
-    description: "Sección de administración del sitio.",
-};
-
-export default function AdminLayout({ children }) {
     return (
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-            {children}
-        </body>
-    );
+        <>
+            {user.logged ? children : <LoginPage />}
+        </>
+    )
 }
+
+export default AdminLayout

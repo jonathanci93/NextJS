@@ -19,12 +19,9 @@ export const metadata = {
 };
 export default function ProductosLayout({ children }) {
   return (
-    <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <>
         <NavigationMenu/>
         {children}
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js" async></script>
-      </body>
-    </html>
+    </>
   );
 }
