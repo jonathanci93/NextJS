@@ -1,7 +1,12 @@
+import NavigationMenu from "./components/NavigationMenu"
 import ProductList from "./components/ProductList"
 
 export default async function Home() {
   return (
-    <ProductList categoria={"all"}/>
+    <>
+      <NavigationMenu/>
+      <ProductList categoria={"all"}/>
+    
+    </>
   )
 }

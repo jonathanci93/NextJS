@@ -1,19 +1,16 @@
-import mockData from "@/app/data/productos.json";
+import { db } from "@/app/firebase/config";
+import { doc, getDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
-const sleep = (timer) => {
-    return new Promise((res) => {
-        setTimeout( res,timer);
-    })
-}
 
 export async function GET (response, {params}) {
     const {slug} = params;
-    let item = mockData.find(item => item.slug == slug);
+    const docRef = doc(db,"productos", slug)
+    const querySnapshot = await getDoc(docRef);
+    let item = {id:querySnapshot.id, ...querySnapshot.data()}
 
     if (!item) {
         item = "No se encontro ningun producto!"
     }
-    await sleep(2000)
     return NextResponse.json(item)
 }   

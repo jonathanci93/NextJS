@@ -5,10 +5,10 @@ const ProductList = async ({categoria}) => {
     const items = await response.json();
 
     return (
-        <section className="container flex flex-row m-auto my-20 flex-wrap justify-center gap-6">
+        <section className="container mx-auto mt-10 flex flex-wrap justify-center gap-6 ">
             {
                 items.map(item => (
-                    <ProductCard key={item.slug} item={item} />
+                    <ProductCard key={item.id} item={item} />
                 ))
             }
         </section>
