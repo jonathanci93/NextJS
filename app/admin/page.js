@@ -1,6 +1,8 @@
 import Boton from "@/app/components/Boton";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const ListPage = async () => {
     const response = await fetch("http://localhost:3000/api/productos/all");
     const items = await response.json();
