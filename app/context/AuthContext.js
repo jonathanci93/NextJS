@@ -16,7 +16,6 @@ const AuthContextProvider = ({children}) => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                //setUser({logged:true, user:user.email, uid:user.uid});
                 logOutUser();
             }
         })

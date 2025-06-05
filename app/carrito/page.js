@@ -49,9 +49,9 @@ const Carrito = () => {
                         ))
                     }
                     <tr>
-                        <td colSpan={6} className="px-6 py-4 text-end font-bold text-xl">
-                            Total: ${sumItems()}
-                        </td>
+                        <td colSpan={4} className="px-6 py-4"><b>Total a Pagar</b></td>
+                        <td className="px-6 py-4"><b>${sumItems()}</b></td>
+                        <td className="px-6 py-4 text-end"><Boton onClick={() => {router.replace("/checkout")}}>Checkout</Boton></td>
                     </tr>
                 </tbody>
             </table>
