@@ -6,16 +6,27 @@ import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
 const Checkout = () => {
-    const { cart, totalItems, sumItems, generateOrder } = useContext(CartContext);
+    const { cart, clearCart, totalItems, sumItems, generateOrder } = useContext(CartContext);
     const router = useRouter();
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
+    const [orderId, setOrderId] = useState("");
+
+    if (orderId) {
+        return (
+            <div className="container mx-auto text-center my-20">
+                <h1 className="text-3xl font-black mb-4">Gracias por tu Compra!</h1>
+                <h3 className="text-xl mb-6">Tu ID de Compra es: <b>{orderId}</b></h3>
+                <Boton onClick={() => router.replace("/")}>Ir a la Página Principal</Boton>
+            </div>
+        );
+    }
 
     if (totalItems() === 0) {
         return (
-            <div className="container m-auto my-20 text-center">
-                <h1 className="text-3xl font-bold mb-4">¡El carrito está vacío!</h1>
+            <div className="container mx-auto text-center my-20">
+                <h1 className="text-3xl font-black mb-6">El Carrito está vacío!</h1>
                 <Boton onClick={() => router.back()}>Volver atrás</Boton>
             </div>
         );
@@ -23,58 +34,59 @@ const Checkout = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const orderId = await generateOrder(nombre, email, telefono);
-        console.log("Se creó el carrito con el ID #" + orderId);
-    }
+        const id = await generateOrder(nombre, email, telefono);
+        setOrderId(id);
+        clearCart();
+    };
 
     return (
-        <div className="container mx-auto flex flex-col gap-12 my-20 px-4">
-            {/* Formulario */}
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded-xl shadow border border-gray-200">
-                <h1 className="text-3xl font-bold mb-6 text-center">Generar Orden</h1>
+        <div className="container mx-auto flex flex-col md:flex-row gap-10 my-20">
+            <form
+                onSubmit={handleSubmit}
+                method="post"
+                className="max-w-md w-full bg-white border border-gray-200 p-6 rounded-xl shadow-md"
+            >
+                <h1 className="text-3xl font-black mb-6">Generar Orden</h1>
 
-                <div className="mb-4">
-                    <label className="block text-sm font-semibold text-gray-800 mb-1">Nombre</label>
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-semibold text-gray-800">Nombre</label>
                     <input
                         type="text"
-                        placeholder="Ingrese nombre"
+                        placeholder="Ingrese Nombre"
                         value={nombre}
                         onInput={(e) => setNombre(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-lg text-gray-900 border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-sm font-semibold text-gray-800 mb-1">Email</label>
-                    <input
-                        type="email"
-                        placeholder="Ingrese email"
-                        value={email}
-                        onInput={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-lg text-gray-900 border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-600"
-                    />
-                </div>
-
-                <div className="mb-6">
-                    <label className="block text-sm font-semibold text-gray-800 mb-1">Teléfono</label>
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-semibold text-gray-800">Email</label>
                     <input
                         type="text"
-                        placeholder="Ingrese teléfono"
-                        value={telefono}
-                        onInput={(e) => setTelefono(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-lg text-gray-900 border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        placeholder="Ingrese Email"
+                        value={email}
+                        onInput={(e) => setEmail(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
                     />
                 </div>
 
-                <div className="text-center">
-                    <Boton type="submit">Enviar</Boton>
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-semibold text-gray-800">Teléfono</label>
+                    <input
+                        type="text"
+                        placeholder="Ingrese Teléfono"
+                        value={telefono}
+                        onInput={(e) => setTelefono(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+                    />
                 </div>
+
+                <Boton type="submit">Enviar</Boton>
             </form>
 
-            {/* Tabla de productos */}
-            <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left border border-gray-200 shadow-sm rounded-xl overflow-hidden">
-                    <thead className="text-xs uppercase bg-gray-100 text-gray-700">
+            <div className="overflow-x-auto w-full">
+                <table className="min-w-full border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700">
                         <tr>
                             <th className="px-6 py-3">Imagen</th>
                             <th className="px-6 py-3">Producto</th>
@@ -85,18 +97,18 @@ const Checkout = () => {
                     </thead>
                     <tbody>
                         {cart.map((item) => (
-                            <tr key={item.id} className="bg-white border-t">
+                            <tr key={item.id} className="border-t border-gray-200">
                                 <td className="px-6 py-4">
-                                    <img src={item.imagen} alt={item.titulo} className="w-20 h-auto object-contain" />
+                                    <img src={item.imagen} alt={item.titulo} width={80} className="rounded" />
                                 </td>
-                                <td className="px-6 py-4 font-medium">{item.titulo}</td>
+                                <td className="px-6 py-4">{item.titulo}</td>
                                 <td className="px-6 py-4">${item.precio}</td>
                                 <td className="px-6 py-4">x{item.cantidad}</td>
-                                <td className="px-6 py-4 font-semibold">${item.precio * item.cantidad}</td>
+                                <td className="px-6 py-4">${item.precio * item.cantidad}</td>
                             </tr>
                         ))}
-                        <tr className="bg-gray-50 font-semibold">
-                            <td colSpan={4} className="px-6 py-4 text-right">Total a pagar:</td>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td colSpan={4} className="px-6 py-4 text-right">Total a Pagar</td>
                             <td className="px-6 py-4">${sumItems()}</td>
                         </tr>
                     </tbody>
